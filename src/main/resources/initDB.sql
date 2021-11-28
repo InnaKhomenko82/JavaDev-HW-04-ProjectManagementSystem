@@ -35,7 +35,7 @@ create table skills (
 create table projects (
   id int not null auto_increment,
   name varchar(45) default null,
-  start date default null,
+  start timestamp default null,
   cost decimal(10,0) default null,
   primary key (id)
 );

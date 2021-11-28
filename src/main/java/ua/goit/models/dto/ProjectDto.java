@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.goit.models.BaseEntity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
@@ -19,14 +19,14 @@ public class ProjectDto implements BaseEntity<Long> {
     private static final long serialVersionUID = 3647320658144968472L;
 
     private Long id;
-    private Date start;
+    private Timestamp start;
     private String name;
     private Integer quantityDevs;
 
     @Override
     public String toString() {
-        SimpleDateFormat formatForDate = new SimpleDateFormat("dd.MM.yyyy");
-        return "start=" + formatForDate.format(start) +
+        DateTimeFormatter formatForDate = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return "start=" + start.toLocalDateTime().toLocalDate().format(formatForDate) +
                 ", name=" + name + ", quantityDevs=" + quantityDevs;
     }
 }

@@ -1,13 +1,12 @@
 package ua.goit.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 
 @Data
 @Builder
@@ -27,15 +26,38 @@ public class Project implements BaseEntity<Long> {
     private String name;
 
     @Column(name = "start")
-    private LocalDate projectStart;
+    private Timestamp projectStart;
 
     @Column(name = "cost")
     private Integer cost;
 
+    @SneakyThrows
     public Project(String ... parameters){
         this.id = Long.valueOf(parameters[0]);
         this.name = parameters[1];
-        this.projectStart = LocalDate.parse(parameters[2]);
+
+        TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
+        TimeZone.setDefault(utcTimeZone);
+
+        DateTimeFormatter formatForDate = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String timestampAsString = parameters[2];
+        Timestamp timestamp = Timestamp.valueOf(LocalDate.
+                parse(timestampAsString, formatForDate).atStartOfDay());
+        this.projectStart = timestamp;
+
         this.cost = Integer.valueOf(parameters[3]);
+    }
+
+    @Override
+    public String toString() {
+
+        DateTimeFormatter formatForDate = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", projectStart=" +
+                projectStart.toLocalDateTime().toLocalDate().format(formatForDate) +
+                ", cost=" + cost +
+                '}';
     }
 }
