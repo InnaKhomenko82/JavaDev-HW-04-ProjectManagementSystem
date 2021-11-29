@@ -9,6 +9,7 @@ import ua.goit.controller.MessageSender;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CommandExecutor {
 
@@ -49,5 +50,12 @@ public class CommandExecutor {
             }
         }
         return commandHandlers;
+    }
+
+    static String createCommandHelp(){
+        return handlers.stream().sorted(Comparator.comparing(CommandHandler::commandPosition))
+                .map(commandHandler -> String.join("\n", commandHandler.commandDescription(),
+                        commandHandler.commandExample()))
+                .collect(Collectors.joining("\n"));
     }
 }

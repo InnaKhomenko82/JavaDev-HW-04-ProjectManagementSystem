@@ -5,10 +5,6 @@ import lombok.Getter;
 import ua.goit.controller.Controller;
 import ua.goit.controller.MessageSender;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class HandlerHelp extends CommandHandler {
 
     @Getter(AccessLevel.PROTECTED)
@@ -20,11 +16,7 @@ public class HandlerHelp extends CommandHandler {
 
     @Override
     protected void apply(String... command) {
-        List<CommandHandler> commandHandlers = CommandExecutor.getHandlers();
-        messageSender.send(commandHandlers.stream().sorted(Comparator.comparing(o -> o.commandPosition()))
-                .map(commandHandler -> String.join("\n", commandHandler.commandDescription(),
-                        commandHandler.commandExample()))
-                .collect(Collectors.joining("\n")));
+        messageSender.send(CommandExecutor.createCommandHelp());
     }
 
     @Override
