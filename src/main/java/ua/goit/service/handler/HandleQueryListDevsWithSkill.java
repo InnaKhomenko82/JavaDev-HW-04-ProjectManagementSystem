@@ -13,8 +13,8 @@ public class HandleQueryListDevsWithSkill extends CommandHandler {
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"query", "listDevsWithSkill"};
 
-    protected HandleQueryListDevsWithSkill(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandleQueryListDevsWithSkill(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @SneakyThrows

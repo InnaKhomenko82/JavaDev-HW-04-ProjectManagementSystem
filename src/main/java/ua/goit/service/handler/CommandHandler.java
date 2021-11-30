@@ -11,6 +11,8 @@ public abstract class CommandHandler {
 
     protected final Controller controller;
 
+    protected final CommandExecutor executor;
+
     protected abstract void apply(String... command);
 
     protected abstract String[] getProcessedCommands();

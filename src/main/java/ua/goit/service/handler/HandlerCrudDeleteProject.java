@@ -13,8 +13,8 @@ public class HandlerCrudDeleteProject extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "delete", "Project"};
 
-    public HandlerCrudDeleteProject(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudDeleteProject(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

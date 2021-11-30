@@ -11,8 +11,8 @@ public class HandlerCrudCreateProject extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "create", "Project"};
 
-    public HandlerCrudCreateProject(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudCreateProject(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

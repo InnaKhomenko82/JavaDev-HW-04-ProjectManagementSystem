@@ -13,9 +13,8 @@ public class HandleQuerySalaryByProjectName extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"query", "salaryByProjectName"};
 
-
-    public HandleQuerySalaryByProjectName(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandleQuerySalaryByProjectName(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @SneakyThrows

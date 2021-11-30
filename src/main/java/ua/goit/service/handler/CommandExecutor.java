@@ -8,13 +8,15 @@ import ua.goit.controller.Controller;
 import ua.goit.controller.MessageSender;
 
 import java.lang.reflect.Modifier;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public class CommandExecutor {
 
     @Getter(AccessLevel.PROTECTED)
-    private static List<CommandHandler> handlers;
+    private final List<CommandHandler> handlers;
 
     public CommandExecutor(MessageSender messageSender, Controller controller) {
         this.handlers = createCommandHandler(messageSender, controller);
@@ -38,24 +40,17 @@ public class CommandExecutor {
     }
 
     @SneakyThrows
-    static List<CommandHandler> createCommandHandler(MessageSender messageSender, Controller controller) {
+    private List<CommandHandler> createCommandHandler(MessageSender messageSender, Controller controller) {
         Reflections reflections = new Reflections("ua.goit");
         Set<Class<? extends CommandHandler>> classes = reflections.getSubTypesOf(CommandHandler.class);
         List<CommandHandler> commandHandlers = new ArrayList<>(classes.size());
         for (Class<? extends CommandHandler> clazz : classes) {
             if (!Modifier.isAbstract(clazz.getModifiers())) {
-                CommandHandler handler = clazz.getDeclaredConstructor(MessageSender.class, Controller.class)
-                        .newInstance(messageSender, controller);
+                CommandHandler handler = clazz.getDeclaredConstructor(MessageSender.class, Controller.class, CommandExecutor.class)
+                        .newInstance(messageSender, controller, this);
                 commandHandlers.add(handler);
             }
         }
         return commandHandlers;
-    }
-
-    static String createCommandHelp(){
-        return handlers.stream().sorted(Comparator.comparing(CommandHandler::commandPosition))
-                .map(commandHandler -> String.join("\n", commandHandler.commandDescription(),
-                        commandHandler.commandExample()))
-                .collect(Collectors.joining("\n"));
     }
 }

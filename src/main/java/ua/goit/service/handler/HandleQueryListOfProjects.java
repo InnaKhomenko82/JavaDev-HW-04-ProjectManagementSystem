@@ -13,9 +13,8 @@ public class HandleQueryListOfProjects extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"query", "listOfProjects"};
 
-
-    public HandleQueryListOfProjects(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandleQueryListOfProjects(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @SneakyThrows

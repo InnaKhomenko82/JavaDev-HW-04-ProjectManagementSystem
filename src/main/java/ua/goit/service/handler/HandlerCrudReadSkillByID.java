@@ -14,8 +14,8 @@ public class HandlerCrudReadSkillByID extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "read", "Skill"};
 
-    public HandlerCrudReadSkillByID(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudReadSkillByID(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

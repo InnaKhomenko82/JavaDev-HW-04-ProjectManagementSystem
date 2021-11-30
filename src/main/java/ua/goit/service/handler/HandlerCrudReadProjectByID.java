@@ -14,8 +14,8 @@ public class HandlerCrudReadProjectByID extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "read", "Project"};
 
-    public HandlerCrudReadProjectByID(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudReadProjectByID(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

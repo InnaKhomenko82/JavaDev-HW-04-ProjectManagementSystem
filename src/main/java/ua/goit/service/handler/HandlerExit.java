@@ -10,8 +10,8 @@ public class HandlerExit extends CommandHandler {
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"exit"};
 
-    protected HandlerExit(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerExit(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

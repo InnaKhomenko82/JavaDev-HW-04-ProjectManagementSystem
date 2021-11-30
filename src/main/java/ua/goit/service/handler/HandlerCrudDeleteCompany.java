@@ -14,8 +14,8 @@ public class HandlerCrudDeleteCompany extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "delete", "Company"};
 
-    public HandlerCrudDeleteCompany(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudDeleteCompany(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override

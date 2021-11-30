@@ -14,8 +14,8 @@ public class HandlerCrudUpdateCompany extends CommandHandler{
     @Getter(AccessLevel.PROTECTED)
     private final String[] processedCommands = {"crud", "update", "Company"};
 
-    public HandlerCrudUpdateCompany(MessageSender messageSender, Controller controller) {
-        super(messageSender, controller);
+    protected HandlerCrudUpdateCompany(MessageSender messageSender, Controller controller, CommandExecutor executor) {
+        super(messageSender, controller, executor);
     }
 
     @Override
